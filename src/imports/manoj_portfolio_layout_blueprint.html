@@ -1,0 +1,499 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.page { width: 100%; max-width: 680px; }
+
+.section-label {
+  font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--color-text-secondary); padding: 6px 10px; background: var(--color-background-secondary);
+  border-radius: 4px; display: inline-block; margin-bottom: 10px;
+}
+.section-block {
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden; margin-bottom: 16px;
+}
+.section-header {
+  background: var(--color-background-secondary);
+  border-bottom: 0.5px solid var(--color-border-tertiary);
+  padding: 10px 14px; display: flex; align-items: center; justify-content: space-between;
+}
+.section-header .s-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+.section-header .s-note  { font-size: 11px; color: var(--color-text-secondary); }
+.section-body { padding: 14px; background: var(--color-background-primary); }
+
+/* ── HERO ── */
+.hero-mock {
+  min-height: 130px; background: var(--color-background-tertiary);
+  border-radius: var(--border-radius-md); display: flex; align-items: center;
+  padding: 20px; gap: 20px; position: relative; overflow: hidden;
+}
+.hero-text { flex: 1; }
+.hero-tag { font-size: 10px; color: var(--color-text-info); font-weight: 500; letter-spacing:.06em; margin-bottom:6px; }
+.hero-name { font-size: 22px; font-weight: 500; color: var(--color-text-primary); line-height:1.2; margin-bottom: 4px; }
+.hero-role { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 12px; }
+.hero-btns { display: flex; gap: 8px; }
+.btn-pri { background: var(--color-text-primary); color: var(--color-background-primary); font-size: 11px; padding: 6px 14px; border-radius: var(--border-radius-md); font-weight: 500; }
+.btn-sec { border: 0.5px solid var(--color-border-secondary); font-size: 11px; padding: 6px 14px; border-radius: var(--border-radius-md); color: var(--color-text-secondary); }
+.hero-avatar { width: 70px; height: 70px; border-radius: 50%; background: var(--color-background-info); border: 2px solid var(--color-border-info); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 500; color: var(--color-text-info); flex-shrink: 0; }
+.hero-dots { display: flex; gap: 5px; margin-top: 10px; }
+.hero-dot { width: 20px; height: 3px; border-radius: 2px; background: var(--color-border-secondary); }
+.hero-dot.active { background: var(--color-text-primary); width: 28px; }
+
+/* ── ABOUT ── */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.about-stat { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 10px 12px; }
+.about-stat .num { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
+.about-stat .lbl { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+.about-bio { font-size: 12px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 12px; }
+.skill-row { margin-bottom: 8px; }
+.skill-row .sk-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--color-text-secondary); margin-bottom: 3px; }
+.skill-bar { height: 4px; background: var(--color-background-tertiary); border-radius: 2px; }
+.skill-fill { height: 100%; border-radius: 2px; background: var(--color-text-primary); }
+
+/* ── TABS ── */
+.tab-row { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+.tab { font-size: 11px; padding: 5px 12px; border-radius: 20px; border: 0.5px solid var(--color-border-secondary); color: var(--color-text-secondary); cursor: pointer; }
+.tab.active { background: var(--color-text-primary); color: var(--color-background-primary); border-color: var(--color-text-primary); }
+
+/* ── PROJECT CARDS ── */
+.proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.proj-card {
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg); overflow: hidden;
+  background: var(--color-background-primary);
+}
+.proj-thumb {
+  height: 70px; background: var(--color-background-secondary);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; color: var(--color-text-secondary); position: relative;
+}
+.proj-thumb.med { background: linear-gradient(135deg, #e8f5ff 0%, #d6eeff 100%); }
+.proj-thumb.grn { background: linear-gradient(135deg, #e6f9f2 0%, #cef5e3 100%); }
+.proj-thumb.org { background: linear-gradient(135deg, #fff3e8 0%, #ffe0c8 100%); }
+.proj-thumb.lav { background: linear-gradient(135deg, #f0ecff 0%, #e4dcff 100%); }
+.proj-thumb.pnk { background: linear-gradient(135deg, #fff0f5 0%, #ffd6e7 100%); }
+.proj-thumb.gy  { background: linear-gradient(135deg, #f5f5f5 0%, #ebebeb 100%); }
+.proj-badge {
+  position: absolute; top: 7px; right: 7px;
+  font-size: 9px; padding: 2px 7px; border-radius: 10px;
+  font-weight: 500;
+}
+.badge-design { background: #ede9ff; color: #6644cc; }
+.badge-live   { background: #d4f5e8; color: #1a7a50; }
+.badge-code   { background: #fff2d6; color: #8a5500; }
+.badge-mobile { background: #fce8f5; color: #9b2680; }
+.proj-info { padding: 10px 10px 12px; }
+.proj-name { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px; }
+.proj-desc { font-size: 10px; color: var(--color-text-secondary); margin-bottom: 8px; line-height: 1.4; }
+.proj-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.tag { font-size: 9px; padding: 2px 6px; border-radius: 4px; border: 0.5px solid var(--color-border-tertiary); color: var(--color-text-secondary); }
+.proj-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+.proj-tools { font-size: 9px; color: var(--color-text-secondary); }
+.proj-link { font-size: 9px; color: var(--color-text-info); font-weight: 500; }
+
+/* ── FEATURED CARD (full width) ── */
+.proj-card.featured {
+  grid-column: span 2;
+  display: flex; gap: 0;
+}
+.proj-card.featured .proj-thumb {
+  width: 180px; height: auto; flex-shrink: 0; border-radius: 0;
+}
+.proj-card.featured .proj-info { flex: 1; padding: 14px; }
+.proj-card.featured .proj-name { font-size: 14px; }
+.proj-card.featured .proj-desc { font-size: 11px; }
+
+/* ── SECTION DIVIDER ── */
+.sec-divider {
+  display: flex; align-items: center; gap: 10px; margin: 6px 0 14px;
+}
+.sec-divider span { font-size: 13px; font-weight: 500; color: var(--color-text-primary); white-space: nowrap; }
+.sec-divider::before, .sec-divider::after {
+  content: ''; flex: 1; height: 0.5px; background: var(--color-border-tertiary);
+}
+
+/* ── EXPERIENCE ── */
+.exp-item { display: flex; gap: 10px; margin-bottom: 14px; }
+.exp-dot-col { display: flex; flex-direction: column; align-items: center; padding-top: 3px; }
+.exp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-text-primary); flex-shrink: 0; }
+.exp-line { width: 1px; flex: 1; background: var(--color-border-tertiary); margin-top: 4px; }
+.exp-content { flex: 1; padding-bottom: 4px; }
+.exp-role { font-size: 12px; font-weight: 500; color: var(--color-text-primary); }
+.exp-co { font-size: 11px; color: var(--color-text-info); margin-bottom: 2px; }
+.exp-period { font-size: 10px; color: var(--color-text-secondary); }
+.exp-desc { font-size: 10px; color: var(--color-text-secondary); margin-top: 4px; line-height: 1.5; }
+
+/* ── CONTACT ── */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.contact-item { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: var(--color-background-secondary); border-radius: var(--border-radius-md); }
+.contact-icon { font-size: 14px; color: var(--color-text-secondary); }
+.contact-text .ct-label { font-size: 9px; color: var(--color-text-secondary); }
+.contact-text .ct-val   { font-size: 11px; color: var(--color-text-primary); font-weight: 500; }
+
+/* ── NAV ── */
+.nav-mock { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: var(--color-background-primary); border-bottom: 0.5px solid var(--color-border-tertiary); }
+.nav-logo { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+.nav-links { display: flex; gap: 14px; }
+.nav-link { font-size: 11px; color: var(--color-text-secondary); }
+.nav-link.active { color: var(--color-text-primary); font-weight: 500; }
+.nav-cta { font-size: 11px; padding: 5px 12px; background: var(--color-text-primary); color: var(--color-background-primary); border-radius: var(--border-radius-md); }
+
+/* ── ANNOTATION ── */
+.anno { font-size: 10px; color: var(--color-text-secondary); background: var(--color-background-secondary); border-left: 2px solid var(--color-border-secondary); padding: 6px 10px; border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0; margin-top: 10px; line-height: 1.5; }
+.anno b { color: var(--color-text-primary); font-weight: 500; }
+</style>
+
+<h2 class="sr-only">Portfolio layout blueprint for Namadi Manoj Kumar — full section-by-section wireframe</h2>
+
+<div class="page">
+
+<!-- ── PAGE TITLE ── -->
+<div style="padding: 4px 0 14px">
+  <div style="font-size:16px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px">Portfolio layout blueprint</div>
+  <div style="font-size:12px;color:var(--color-text-secondary)">Full section breakdown — share this with your AI builder</div>
+</div>
+
+<!-- ══ 1. NAVBAR ══ -->
+<div class="section-label">Section 1 — Navbar</div>
+<div class="section-block">
+  <div class="nav-mock">
+    <div class="nav-logo">Manoj<span style="color:var(--color-text-info)">.</span></div>
+    <div class="nav-links">
+      <span class="nav-link active">Home</span>
+      <span class="nav-link">Work</span>
+      <span class="nav-link">About</span>
+      <span class="nav-link">Resume</span>
+      <span class="nav-link">Contact</span>
+    </span>
+    </div>
+    <div class="nav-cta">Hire me</div>
+  </div>
+  <div class="anno"><b>Sticky navbar.</b> Logo left · Links center · CTA right. Active section highlighted. Dark/light mode toggle as icon on far right. Mobile: hamburger menu.</div>
+</div>
+
+<!-- ══ 2. HERO ══ -->
+<div class="section-label">Section 2 — Hero</div>
+<div class="section-block">
+  <div class="section-body">
+    <div class="hero-mock">
+      <div class="hero-text">
+        <div class="hero-tag">Available for work ●</div>
+        <div class="hero-name">Namadi<br>Manoj Kumar</div>
+        <div class="hero-role">Product Designer · UI/UX · Web Developer</div>
+        <div class="hero-btns">
+          <div class="btn-pri">View work</div>
+          <div class="btn-sec">Download CV</div>
+        </div>
+        <div class="hero-dots" style="margin-top:12px">
+          <div class="hero-dot active"></div>
+          <div class="hero-dot"></div>
+          <div class="hero-dot"></div>
+          <div style="font-size:9px;color:var(--color-text-secondary);margin-left:4px">3+ yrs · 20+ projects</div>
+        </div>
+      </div>
+      <div>
+        <div class="hero-avatar">MK</div>
+        <div style="display:flex;gap:6px;margin-top:10px;justify-content:center">
+          <div style="width:24px;height:24px;border-radius:50%;border:0.5px solid var(--color-border-secondary);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--color-text-secondary)"><i class="ti ti-brand-linkedin" aria-hidden="true"></i></div>
+          <div style="width:24px;height:24px;border-radius:50%;border:0.5px solid var(--color-border-secondary);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--color-text-secondary)"><i class="ti ti-brand-dribbble" aria-hidden="true"></i></div>
+          <div style="width:24px;height:24px;border-radius:50%;border:0.5px solid var(--color-border-secondary);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--color-text-secondary)"><i class="ti ti-brand-github" aria-hidden="true"></i></div>
+        </div>
+      </div>
+    </div>
+    <div class="anno"><b>Full-screen hero.</b> Animated greeting text (typewriter or fade). Profile photo right. "Available for work" badge pulses green. Scrolling ticker below hero: "Figma · Framer AI · React · Next.js · Healthcare · SaaS · 20+ Projects"</div>
+  </div>
+</div>
+
+<!-- ══ 3. STATS BAR ══ -->
+<div class="section-label">Section 3 — Stats bar</div>
+<div class="section-block">
+  <div class="section-body">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+      <div class="about-stat"><div class="num">20+</div><div class="lbl">Projects shipped</div></div>
+      <div class="about-stat"><div class="num">3+</div><div class="lbl">Years experience</div></div>
+      <div class="about-stat"><div class="num">7</div><div class="lbl">Live products</div></div>
+      <div class="about-stat"><div class="num">5</div><div class="lbl">Domains covered</div></div>
+    </div>
+    <div class="anno"><b>Full-width strip.</b> Numbers count-up on scroll. 4 stats in a row. Add a thin border-top/bottom to separate from sections.</div>
+  </div>
+</div>
+
+<!-- ══ 4. PROJECTS ══ -->
+<div class="section-label">Section 4 — Projects (16 cards · 2 tabs)</div>
+<div class="section-block">
+  <div class="section-body">
+
+    <!-- Tab bar -->
+    <div class="tab-row">
+      <div class="tab active">All</div>
+      <div class="tab">Design + Code</div>
+      <div class="tab">Pure Design</div>
+      <div class="tab">Mobile</div>
+      <div class="tab">Dashboards</div>
+    </div>
+
+    <!-- ── Design + Code section ── -->
+    <div class="sec-divider"><span>Design + Code · Live products</span></div>
+    <div class="proj-grid">
+
+      <!-- Featured card: Glenns HMS -->
+      <div class="proj-card featured">
+        <div class="proj-thumb grn" style="width:160px">
+          <span class="proj-badge badge-live">Live</span>
+          <i class="ti ti-building-hospital" style="font-size:32px;color:#1a7a50;opacity:.4" aria-hidden="true"></i>
+        </div>
+        <div class="proj-info">
+          <div class="proj-name">Glenns — Hospital Management System</div>
+          <div class="proj-desc">Full receptionist portal: patient registration, appointments, billing, bed management, discharge & analytics. Designed and developed end-to-end.</div>
+          <div class="proj-tags">
+            <span class="tag">Healthcare</span><span class="tag">Dashboard</span><span class="tag">0→1</span><span class="tag">Operational</span>
+          </div>
+          <div class="proj-footer">
+            <span class="proj-tools">Figma · React · Next.js</span>
+            <span class="proj-link">View live ↗</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-thumb med"><span class="proj-badge badge-live">Live</span><i class="ti ti-heart-rate-monitor" style="font-size:28px;color:#185fa5;opacity:.4" aria-hidden="true"></i></div>
+        <div class="proj-info">
+          <div class="proj-name">Medibank Mobile App</div>
+          <div class="proj-desc">Full healthcare app — booking, consultations, pharmacy, insurance, health tracking.</div>
+          <div class="proj-tags"><span class="tag">Healthcare</span><span class="tag">Mobile</span></div>
+          <div class="proj-footer"><span class="proj-tools">Figma · Next.js</span><span class="proj-link">Figma ↗</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-thumb lav"><span class="proj-badge badge-live">Live</span><i class="ti ti-user-circle" style="font-size:28px;color:#6644cc;opacity:.4" aria-hidden="true"></i></div>
+        <div class="proj-info">
+          <div class="proj-name">Pauz — Social Media App</div>
+          <div class="proj-desc">Gen-Z social platform — mobile UI + live landing page. Full 0→1 product.</div>
+          <div class="proj-tags"><span class="tag">Social</span><span class="tag">Mobile</span></div>
+          <div class="proj-footer"><span class="proj-tools">Figma · Next.js</span><span class="proj-link">Live ↗</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-thumb org"><span class="proj-badge badge-live">Live</span><i class="ti ti-home" style="font-size:28px;color:#8a5500;opacity:.4" aria-hidden="true"></i></div>
+        <div class="proj-info">
+          <div class="proj-name">Medini — Homestay Booking</div>
+          <div class="proj-desc">Immersive booking platform. Framer AI for layout automation.</div>
+          <div class="proj-tags"><span class="tag">Hospitality</span><span class="tag">Booking</span></div>
+          <div class="proj-footer"><span class="proj-tools">Figma · Wix · Framer AI</span><span class="proj-link">Live ↗</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-thumb gy"><span class="proj-badge badge-live">Live</span><i class="ti ti-chart-bar" style="font-size:28px;color:#5f5e5a;opacity:.4" aria-hidden="true"></i></div>
+        <div class="proj-info">
+          <div class="proj-name">HR Management System</div>
+          <div class="proj-desc">Full HR dashboard — employees, leaves, payroll, reports.</div>
+          <div class="proj-tags"><span class="tag">Dashboard</span><span class="tag">SaaS</span></div>
+          <div class="proj-footer"><span class="proj-tools">React · Next.js</span><span class="proj-link">Live ↗</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-thumb med"><span class="proj-badge badge-live">Live</span><i class="ti ti-home-2" style="font-size:28px;color:#185fa5;opacity:.35" aria-hidden="true"></i></div>
+        <div class="proj-info">
+          <div class="proj-name">Modulespace</div>
+          <div class="proj-desc">Architecture & interior platform. Live website.</div>
+          <div class="proj-tags"><span class="tag">Architecture</span><span class="tag">Website</span></div>
+          <div class="proj-footer"><span class="proj-tools">Web Technologies</span><span class="proj-link">Live ↗</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-thumb gy"><span class="proj-badge badge-code">Advisory</span><i class="ti ti-briefcase" style="font-size:28px;color:#5f5e5a;opacity:.4" aria-hidden="true"></i></div>
+        <div class="proj-info">
+          <div class="proj-name">33 Kuber Advisory</div>
+          <div class="proj-desc">Corporate advisory platform. Live production site.</div>
+          <div class="proj-tags"><span class="tag">Corporate</span><span class="tag">Website</span></div>
+          <div class="proj-footer"><span class="proj-tools">Figma · Web</span><span class="proj-link">Live ↗</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Pure Design section ── -->
+    <div class="sec-divider" style="margin-top:18px"><span>Pure Design · UI/UX concepts</span></div>
+    <div class="proj-grid">
+
+      <div class="proj-card">
+        <div class="proj-thumb lav"><span class="proj-badge badge-design">Design</span><i class="ti ti-layout-dashboard" style="font-size:28px;color:#6644cc;opacity:.4" aria-hidden="true"></i></div>
+        <div class="proj-info">
+          <div class="proj-name">Lawyer Management System</div>
+          <div class="proj-desc">5 role-based dashboards. Admin, Advocate, Client, Staff, System Admin.</div>
+          <div class="proj-tags"><span class="tag">Legal</span><span class="tag">Multi-role</span></div>
+          <div class="proj-footer"><span class="proj-tools">Figma · Next.js</span><span class="proj-link">Figma ↗</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-thumb pnk"><span class="proj-badge badge-mobile">Mobile</span><i class="ti ti-device-mobile" style="font-size:28px;color:#9b2680;opacity:.4" aria-hidden="true"></i></div>
+        <div class="proj-info">
+          <div class="proj-name">Pauz Mobile Designs</div>
+          <div class="proj-desc">Full mobile UI/UX — wireframes, prototypes, design system.</div>
+          <div class="proj-tags"><span class="tag">Mobile</span><span class="tag">Social</span></div>
+          <div class="proj-footer"><span class="proj-tools">Figma</span><span class="proj-link">Figma ↗</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-thumb org"><span class="proj-badge badge-mobile">Mobile</span><i class="ti ti-music" style="font-size:28px;color:#8a5500;opacity:.4" aria-hidden="true"></i></div>
+        <div class="proj-info">
+          <div class="proj-name">Groovyn Mobile App</div>
+          <div class="proj-desc">Music app mobile UI concept. Modern motion-focused design.</div>
+          <div class="proj-tags"><span class="tag">Mobile</span><span class="tag">Entertainment</span></div>
+          <div class="proj-footer"><span class="proj-tools">Figma</span><span class="proj-link">Figma ↗</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-thumb med"><span class="proj-badge badge-design">Design</span><i class="ti ti-layout" style="font-size:28px;color:#185fa5;opacity:.4" aria-hidden="true"></i></div>
+        <div class="proj-info">
+          <div class="proj-name">Landing Page Designs</div>
+          <div class="proj-desc">Hero pages + animation concepts. Modern visual storytelling.</div>
+          <div class="proj-tags"><span class="tag">Landing</span><span class="tag">Animation</span></div>
+          <div class="proj-footer"><span class="proj-tools">Figma · Framer</span><span class="proj-link">Figma ↗</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-thumb lav"><span class="proj-badge badge-design">Design</span><i class="ti ti-lock" style="font-size:28px;color:#6644cc;opacity:.4" aria-hidden="true"></i></div>
+        <div class="proj-info">
+          <div class="proj-name">Login Screen Designs</div>
+          <div class="proj-desc">20+ login & auth UI concepts across web and mobile.</div>
+          <div class="proj-tags"><span class="tag">UI</span><span class="tag">Auth</span></div>
+          <div class="proj-footer"><span class="proj-tools">Figma</span><span class="proj-link">Figma ↗</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-thumb grn"><span class="proj-badge badge-design">Design</span><i class="ti ti-chart-dots" style="font-size:28px;color:#1a7a50;opacity:.4" aria-hidden="true"></i></div>
+        <div class="proj-info">
+          <div class="proj-name">Dashboard Designs</div>
+          <div class="proj-desc">Analytics, admin & reporting dashboard UI systems.</div>
+          <div class="proj-tags"><span class="tag">Dashboard</span><span class="tag">Analytics</span></div>
+          <div class="proj-footer"><span class="proj-tools">Figma</span><span class="proj-link">Figma ↗</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-thumb gy"><span class="proj-badge badge-design">Design</span><i class="ti ti-device-desktop" style="font-size:28px;color:#5f5e5a;opacity:.4" aria-hidden="true"></i></div>
+        <div class="proj-info">
+          <div class="proj-name">Website Designs</div>
+          <div class="proj-desc">Multi-industry website UI concepts — corporate, travel, tech.</div>
+          <div class="proj-tags"><span class="tag">Website</span><span class="tag">Multi-industry</span></div>
+          <div class="proj-footer"><span class="proj-tools">Figma · Framer</span><span class="proj-link">Figma ↗</span></div>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-thumb pnk"><span class="proj-badge badge-design">Design</span><i class="ti ti-mountain" style="font-size:28px;color:#9b2680;opacity:.4" aria-hidden="true"></i></div>
+        <div class="proj-info">
+          <div class="proj-name">Great Outdoors</div>
+          <div class="proj-desc">Adventure & travel booking platform UI concept.</div>
+          <div class="proj-tags"><span class="tag">Travel</span><span class="tag">Booking</span></div>
+          <div class="proj-footer"><span class="proj-tools">Figma</span><span class="proj-link">Figma ↗</span></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="anno"><b>Tab filter:</b> All / Design+Code / Pure Design / Mobile / Dashboards. Cards animate in/out on tab switch. Featured card (Glenns HMS) always shows full-width as first card. Each card: thumbnail with color accent, badge (Live/Design/Mobile/Code), title, 1-line description, tool pills, Figma/Live link.</div>
+  </div>
+</div>
+
+<!-- ══ 5. ABOUT ══ -->
+<div class="section-label">Section 5 — About</div>
+<div class="section-block">
+  <div class="section-body">
+    <div class="about-bio">
+      UI/UX Designer & Web Developer with 3+ years shipping responsive, accessible digital products across healthcare, legal, hospitality, and SaaS. I design with systems thinking and build with clean code.
+    </div>
+    <div style="margin-bottom:12px">
+      <div class="skill-row"><div class="sk-label"><span>UI/UX Design</span><span>90%</span></div><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+      <div class="skill-row"><div class="sk-label"><span>Figma · Framer AI</span><span>90%</span></div><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+      <div class="skill-row"><div class="sk-label"><span>Frontend Dev</span><span>80%</span></div><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+      <div class="skill-row"><div class="sk-label"><span>Design Systems</span><span>85%</span></div><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-stat"><div class="num">B.Tech</div><div class="lbl">CSE · Andhra University</div></div>
+      <div class="about-stat"><div class="num">Bengaluru</div><div class="lbl">Based in India</div></div>
+    </div>
+    <div class="anno" style="margin-top:10px"><b>Two-column layout on desktop:</b> Left — photo + social links. Right — bio paragraph, skill bars, quick facts. Skills animate fill on scroll.</div>
+  </div>
+</div>
+
+<!-- ══ 6. EXPERIENCE ══ -->
+<div class="section-label">Section 6 — Experience (timeline)</div>
+<div class="section-block">
+  <div class="section-body">
+    <div class="exp-item">
+      <div class="exp-dot-col"><div class="exp-dot"></div><div class="exp-line"></div></div>
+      <div class="exp-content">
+        <div class="exp-role">UI/UX Designer</div>
+        <div class="exp-co">33 Kuber Advisory India LLP</div>
+        <div class="exp-period">May 2025 – Present · Bengaluru</div>
+        <div class="exp-desc">Responsive interfaces, scalable design systems, AI-assisted workflows using Figma & Framer AI.</div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot-col"><div class="exp-dot"></div><div class="exp-line"></div></div>
+      <div class="exp-content">
+        <div class="exp-role">Freelance Designer & Developer</div>
+        <div class="exp-co">Independent</div>
+        <div class="exp-period">Jan 2024 – Apr 2025 · Remote</div>
+        <div class="exp-desc">20+ projects across healthcare, legal, hospitality, social media.</div>
+      </div>
+    </div>
+    <div class="exp-item" style="margin-bottom:0">
+      <div class="exp-dot-col"><div class="exp-dot" style="opacity:.5"></div></div>
+      <div class="exp-content">
+        <div class="exp-role" style="opacity:.7">Cyber Review Analyst · EPIQ Systems</div>
+        <div class="exp-period">Jan 2023 – Dec 2023</div>
+      </div>
+    </div>
+    <div class="anno"><b>Vertical timeline.</b> Dots + connecting line. Most recent at top. Each entry expands on click to show full bullet points. On mobile: full-width stacked.</div>
+  </div>
+</div>
+
+<!-- ══ 7. CONTACT ══ -->
+<div class="section-label">Section 7 — Contact</div>
+<div class="section-block">
+  <div class="section-body">
+    <div class="contact-grid">
+      <div class="contact-item"><i class="ti ti-mail contact-icon" aria-hidden="true"></i><div class="contact-text"><div class="ct-label">Email</div><div class="ct-val">namadimanojkumar@gmail.com</div></div></div>
+      <div class="contact-item"><i class="ti ti-phone contact-icon" aria-hidden="true"></i><div class="contact-text"><div class="ct-label">Phone</div><div class="ct-val">+91 7993949805</div></div></div>
+      <div class="contact-item"><i class="ti ti-brand-linkedin contact-icon" aria-hidden="true"></i><div class="contact-text"><div class="ct-label">LinkedIn</div><div class="ct-val">manoj-kumar-namadi</div></div></div>
+      <div class="contact-item"><i class="ti ti-brand-dribbble contact-icon" aria-hidden="true"></i><div class="contact-text"><div class="ct-label">Dribbble</div><div class="ct-val">NamadiManojKumar</div></div></div>
+    </div>
+    <div style="margin-top:10px;padding:10px;background:var(--color-background-secondary);border-radius:var(--border-radius-md)">
+      <div style="font-size:11px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px">Send a message</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px">
+        <div style="height:28px;background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:0 8px;font-size:10px;color:var(--color-text-secondary);display:flex;align-items:center">Name</div>
+        <div style="height:28px;background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:0 8px;font-size:10px;color:var(--color-text-secondary);display:flex;align-items:center">Email</div>
+      </div>
+      <div style="height:50px;background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:8px;font-size:10px;color:var(--color-text-secondary);margin-bottom:8px">Message...</div>
+      <div class="btn-pri" style="display:inline-block;font-size:11px">Send message</div>
+    </div>
+    <div class="anno"><b>Contact section.</b> Info grid top + contact form below. Form sends via EmailJS or Formspree (no backend needed). Footer below with copyright + social icons.</div>
+  </div>
+</div>
+
+<!-- ══ TECH STACK PROMPT ══ -->
+<div style="margin-top:4px;padding:12px 14px;border:0.5px solid var(--color-border-info);border-radius:var(--border-radius-lg);background:var(--color-background-info)">
+  <div style="font-size:12px;font-weight:500;color:var(--color-text-info);margin-bottom:6px">Build with — recommended stack</div>
+  <div style="font-size:11px;color:var(--color-text-secondary);line-height:1.7">
+    <b style="color:var(--color-text-primary)">Next.js 14 + Tailwind CSS</b> — fast, SEO-ready, easy to deploy on Netlify/Vercel<br>
+    <b style="color:var(--color-text-primary)">Framer Motion</b> — card animations, scroll reveals, tab transitions<br>
+    <b style="color:var(--color-text-primary)">Shadcn/ui</b> — pre-built accessible components<br>
+    <b style="color:var(--color-text-primary)">EmailJS or Formspree</b> — contact form without backend<br>
+    <b style="color:var(--color-text-primary)">Netlify</b> — same host as current site, free tier
+  </div>
+</div>
+
+</div>
