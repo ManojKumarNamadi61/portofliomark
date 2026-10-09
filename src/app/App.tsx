@@ -1,32 +1,18 @@
-import { useState, useCallback, useEffect } from "react";
-import Lenis from "lenis";
+import { useState, useCallback, Suspense, lazy } from "react";
 import { ThemeProvider } from "./ThemeContext";
 import { PageCtx, type Page } from "./PageContext";
 import { Navbar } from "./components/Navbar";
 import { Preloader } from "./components/Preloader";
-import { Home } from "./pages/Home";
-import { Works } from "./pages/Works";
-import { About } from "./pages/About";
 import { AnimatePresence, motion } from "motion/react";
+
+const Home = lazy(() => import("./pages/Home").then(module => ({ default: module.Home })));
+const Works = lazy(() => import("./pages/Works").then(module => ({ default: module.Works })));
+const About = lazy(() => import("./pages/About").then(module => ({ default: module.About })));
 
 function Inner() {
   const [ready, setReady] = useState(false);
   const [page, setPage] = useState<Page>("home");
   const handleDone = useCallback(() => setReady(true), []);
-
-  /* ── Lenis smooth scroll ── */
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.4,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      touchMultiplier: 1.8,
-    });
-    let raf: number;
-    const loop = (time: number) => { lenis.raf(time); raf = requestAnimationFrame(loop); };
-    raf = requestAnimationFrame(loop);
-    return () => { lenis.destroy(); cancelAnimationFrame(raf); };
-  }, []);
 
   const navigate = (p: Page) => {
     setPage(p);
@@ -51,18 +37,20 @@ function Inner() {
 
         <div style={{ opacity: ready ? 1 : 0, transition: "opacity 0.6s ease", transitionDelay: "0.1s" }}>
           <Navbar />
-          <AnimatePresence mode="wait">
-            <motion.div key={page}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.45 }}
-            >
-              {page === "home"  && <Home />}
-              {page === "works" && <Works />}
-              {page === "about" && <About />}
-            </motion.div>
-          </AnimatePresence>
+          <Suspense fallback={<div style={{ minHeight: "100vh", background: "var(--c-bg)" }} />}>
+            <AnimatePresence mode="wait">
+              <motion.div key={page}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.45 }}
+              >
+                {page === "home"  && <Home />}
+                {page === "works" && <Works />}
+                {page === "about" && <About />}
+              </motion.div>
+            </AnimatePresence>
+          </Suspense>
         </div>
       </div>
     </PageCtx.Provider>

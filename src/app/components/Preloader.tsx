@@ -6,8 +6,8 @@ export function Preloader({ onDone }: { onDone: () => void }) {
   const [phase, setPhase] = useState<"in" | "out">("in");
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase("out"), 2200);
-    const t2 = setTimeout(onDone, 2800);
+    const t1 = setTimeout(() => setPhase("out"), 500);
+    const t2 = setTimeout(onDone, 800);
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, [onDone]);
 

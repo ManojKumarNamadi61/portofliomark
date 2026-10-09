@@ -434,15 +434,40 @@ export function Works() {
               <h2 style={{ fontFamily: F, fontWeight: 800, fontSize: "clamp(24px,3vw,36px)", color: "var(--c-text)", letterSpacing: "-0.04em", margin: 0 }}>Currently Working On</h2>
               <p style={{ fontFamily: F, fontSize: 14, color: "var(--c-text-2)", margin: "8px 0 0" }}>A few projects currently in progress.</p>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 12 }}>
+            <style>{`
+              .currently-working-grid {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: clamp(12px, 2vw, 18px);
+              }
+              .currently-working-card {
+                width: 100%;
+                min-width: 0;
+                box-sizing: border-box;
+              }
+
+              @media (max-width: 767px) {
+                .currently-working-grid {
+                  grid-template-columns: 1fr !important;
+                  gap: 14px !important;
+                }
+                .currently-working-card {
+                  padding: 16px !important;
+                }
+                .currently-working-title {
+                  font-size: clamp(22px, 7vw, 30px) !important;
+                }
+              }
+            `}</style>
+            <div className="currently-working-grid">
               {CURRENTLY_WORKING_ON.map((project) => (
-                <div key={project.title} style={{ background: "var(--c-card)", border: "1px solid var(--c-border)", borderRadius: 16, padding: 18 }}>
+                <div key={project.title} className="currently-working-card" style={{ background: "var(--c-card)", border: "1px solid var(--c-border)", borderRadius: 16, padding: "clamp(16px, 2vw, 20px)", width: "100%", minWidth: 0, boxSizing: "border-box" }}>
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, marginBottom: 10 }}>
                     <span style={{ fontFamily: F, fontSize: 10, fontWeight: 700, color: "var(--c-text-3)", letterSpacing: "0.12em", textTransform: "uppercase" }}>{project.status}</span>
                   </div>
-                  <h3 style={{ fontFamily: F, fontSize: 20, fontWeight: 700, color: "var(--c-text)", margin: "0 0 12px", letterSpacing: "-0.03em" }}>{project.title}</h3>
-                  <p style={{ fontFamily: F, fontSize: 14, color: "var(--c-text-2)", lineHeight: 1.75, margin: "0 0 12px" }}>{project.description}</p>
-                  <p style={{ fontFamily: F, fontSize: 13, color: "var(--c-text-3)", lineHeight: 1.7, margin: 0 }}>{project.short}</p>
+                  <h3 className="currently-working-title" style={{ fontFamily: F, fontSize: "clamp(22px, 2vw, 30px)", fontWeight: 700, color: "var(--c-text)", margin: "0 0 12px", letterSpacing: "-0.03em", lineHeight: 1.1 }}>{project.title}</h3>
+                  <p style={{ fontFamily: F, fontSize: "clamp(13px, 1.5vw, 15px)", color: "var(--c-text-2)", lineHeight: 1.7, margin: "0 0 12px" }}>{project.description}</p>
+                  <p style={{ fontFamily: F, fontSize: "clamp(12px, 1.35vw, 14px)", color: "var(--c-text-3)", lineHeight: 1.7, margin: 0 }}>{project.short}</p>
                 </div>
               ))}
             </div>
